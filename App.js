@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, ScrollView, View, TextInput, Button, Alert, Image } from 'react-native';
-import { Icon, Header, List, ListItem } from 'react-native-elements'
+import { Icon, Header, List, ListItem, SearchBar } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
 
 export default class HomeScreen extends Component {
   render () {
@@ -77,15 +78,14 @@ export default class HomeScreen extends Component {
       },
     ];
     return (
-      <View>
+      <View style={styles.container}>
         <Header
-          leftComponent={{ icon: 'menu', color: '#fff' }}
-          centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+          leftComponent={ <SearchBar placeholder='Type Here...' />}
           rightComponent={{ icon: 'home', color: '#fff' }}
-          outerContainerStyles={{ backgroundColor: '#000' }}
+          outerContainerStyles={{ backgroundColor: '#faebd7' , height: 200 }}
         />
-        <ScrollView>
-          <List containerStyle={{marginBottom: 50}}>
+        <ScrollView style={{ flex: 12 }}>
+          <List containerStyle={{marginBottom: 100}}>
             {
               list.map((l, i) => (
                 <ListItem
@@ -132,4 +132,8 @@ const styles = StyleSheet.create({
     width: 26,
     height: 26,
   },
+});
+
+const stackNav = StackNavigator({
+  // config
 });
