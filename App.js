@@ -3,15 +3,6 @@ import { StyleSheet, Text, View, TextInput, Button, Alert, Image } from 'react-n
 import { TabNavigator } from 'react-navigation';
 
 class HomeScreen extends Component {
-  static navigationOptions = {
-    tabBarLabel: "Home",
-    tabBarIcon: ({ tintColor }) => (
-          <Image
-            source={require('./assets/Astronaut.svg')}
-            style={[styles.icon, {tintColor: tintColor}]}
-          />
-        ),
-  };
   render () {
     const { navigate } = this.props.navigation;
     return (
@@ -60,12 +51,29 @@ class TopBox extends Component {
 
 const App = TabNavigator(
   {
-    Home: { screen: HomeScreen },
+    Home: {
+      screen: HomeScreen,
+      tabBarIcon: ({ tintColor }) => <FontAwesome>{Icons.times}</FontAwesome>,
+      tabBarLabel: 'Home'
+    },
   },
   {
     initialRouteName: 'Home',
-    showLabel: true,
-    showIcon: true,
+    tabBarPosition: "bottom",
+    swipeEnabled: true,
+    animationEnabled: true,
+    lazy: true,
+    order: ["Home"],
+    backBehavior: "initialRoute",
+    tabBarOptions: {
+      activeTintColor: '#e91e63',
+      inactiveTintColor: '#000',
+      showLabel: true,
+      showIcon: true,
+      upperCaseLabel: false,
+      pressColor: '#000',
+      scrollEnabled: false,
+    }
   }
 );
 
