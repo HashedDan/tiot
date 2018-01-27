@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, Image } from 'react-native';
 import { TabNavigator } from 'react-navigation';
+import FontAwesome, { Icons } from "react-native-fontawesome";
 
 class HomeScreen extends Component {
   render () {
