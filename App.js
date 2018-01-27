@@ -1,104 +1,126 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, Image } from 'react-native';
-import { TabNavigator } from 'react-navigation';
-import { Icon } from 'react-native-elements'
+import { StyleSheet, Text, ScrollView, View, TextInput, Button, Alert, Image } from 'react-native';
+import { Icon, Header, List, ListItem } from 'react-native-elements'
 
-class HomeScreen extends Component {
+export default class HomeScreen extends Component {
   render () {
-    const { navigate } = this.props.navigation;
+    const list = [
+      {
+        name: 'Amy Farha',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+        subtitle: 'Vice President'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+      {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'Vice Chairman'
+      },
+    ];
+    return (
+      <View>
+        <Header
+          leftComponent={{ icon: 'menu', color: '#fff' }}
+          centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+          rightComponent={{ icon: 'home', color: '#fff' }}
+          outerContainerStyles={{ backgroundColor: '#000' }}
+        />
+        <ScrollView>
+          <List containerStyle={{marginBottom: 50}}>
+            {
+              list.map((l, i) => (
+                <ListItem
+                  roundAvatar
+                  avatar={{uri:l.avatar_url}}
+                  key={i}
+                  title={l.name}
+                />
+              ))
+            }
+          </List>
+        </ScrollView>
+      </View>
+    );
+  }
+}
+
+class ProfileScreen extends Component {
+  render () {
     return (
       <View style={styles.container}>
-        <View style={{ flex: 1, backgroundColor: 'blue', justifyContent: 'center' }}>
+        <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center' }}>
           <Button title="Click Me"
             onPress= { () =>
               Alert.alert('hey')
             }
           />
           <Icon
-            raised
-            name='heartbeat'
-            type='font-awesome'
-            color='#f50'
-            onPress={() => console.log('hello')} />
+            name='500px'
+            type='entypo' />
         </View>
-        <View style={{ flex: 1, backgroundColor: 'green' }}/>
-        <View style={{ flex: 1, backgroundColor: 'red' }}/>
-        <View style={{ flex: 1, backgroundColor: 'purple' }}/>
       </View>
-      
     );
   }
 }
-
-class Greeting extends Component {
-  constructor(props) {
-    super(props);
-    if (this.props.name == 'Daniel') {
-      this.state = {name:'Master'};
-    }
-    else {
-      this.state= {name: 'imposter'};
-    }
-  }
-
-  render () {
-    return (
-      <Text style={this.props.style}>Hey there {this.state.name}.</Text>
-    );
-  }
-}
-
-class TopBox extends Component {
-  render () {
-    return (
-      <Text style={{color: 'white'}}>Top Half</Text>
-    );
-  }
-}
-
-const App = TabNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-      tabBarIcon: () => <Icon
-            raised
-            name='heartbeat'
-            type='font-awesome'
-            color='#f50'
-            onPress={({tintColor}) => console.log('hello')} />,
-      tabBarLabel: 'Home'
-    },
-  },
-  {
-    initialRouteName: 'Home',
-    tabBarPosition: "bottom",
-    swipeEnabled: true,
-    animationEnabled: true,
-    lazy: true,
-    order: ["Home"],
-    backBehavior: "initialRoute",
-    tabBarOptions: {
-      activeTintColor: '#e91e63',
-      activeBackgroundColor: '#e91e63',
-      labelStyle: {
-          fontSize: 12,
-        },
-        style: {
-          backgroundColor: 'blue',
-        },
-      // inactiveTintColor: '#e91e63',
-      showLabel: true,
-      showIcon: true,
-      upperCaseLabel: false,
-      // pressColor: '#000',
-      scrollEnabled: false,
-    }
-  }
-);
-
-export default App;
-
-
 
 const styles = StyleSheet.create({
   container: {
