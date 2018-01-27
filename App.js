@@ -1,5 +1,36 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, Image } from 'react-native';
+import { TabNavigator } from 'react-navigation';
+
+class HomeScreen extends Component {
+  static navigationOptions = {
+    tabBarLabel: "Home",
+    tabBarIcon: ({ tintColor }) => (
+          <Image
+            source={require('./assets/Astronaut.svg')}
+            style={[styles.icon, {tintColor: tintColor}]}
+          />
+        ),
+  };
+  render () {
+    const { navigate } = this.props.navigation;
+    return (
+      <View style={styles.container}>
+        <View style={{ flex: 1, backgroundColor: 'blue', justifyContent: 'center' }}>
+          <Button title="Click Me"
+            onPress= { () =>
+              Alert.alert('hey')
+            }
+          />
+        </View>
+        <View style={{ flex: 1, backgroundColor: 'green' }}/>
+        <View style={{ flex: 1, backgroundColor: 'red' }}/>
+        <View style={{ flex: 1, backgroundColor: 'purple' }}/>
+      </View>
+      
+    );
+  }
+}
 
 class Greeting extends Component {
   constructor(props) {
@@ -27,17 +58,20 @@ class TopBox extends Component {
   }
 }
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={{flex: 1, backgroundColor: 'powderblue'}} />
-        <View style={{flex: 2, backgroundColor: 'skyblue'}} />
-        <View style={{flex: 3, backgroundColor: 'steelblue'}} />
-      </View>
-    );
+const App = TabNavigator(
+  {
+    Home: { screen: HomeScreen },
+  },
+  {
+    initialRouteName: 'Home',
+    showLabel: true,
+    showIcon: true,
   }
-}
+);
+
+export default App;
+
+
 
 const styles = StyleSheet.create({
   container: {
