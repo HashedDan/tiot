@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, Image } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import FontAwesome, { Icons } from "react-native-fontawesome";
+import { Icon } from 'react-native-elements'
 
 class HomeScreen extends Component {
   render () {
@@ -14,6 +14,12 @@ class HomeScreen extends Component {
               Alert.alert('hey')
             }
           />
+          <Icon
+            raised
+            name='heartbeat'
+            type='font-awesome'
+            color='#f50'
+            onPress={() => console.log('hello')} />
         </View>
         <View style={{ flex: 1, backgroundColor: 'green' }}/>
         <View style={{ flex: 1, backgroundColor: 'red' }}/>
@@ -54,7 +60,12 @@ const App = TabNavigator(
   {
     Home: {
       screen: HomeScreen,
-      tabBarIcon: ({ tintColor }) => <FontAwesome>{Icons.times}</FontAwesome>,
+      tabBarIcon: () => <Icon
+            raised
+            name='heartbeat'
+            type='font-awesome'
+            color='#f50'
+            onPress={({tintColor}) => console.log('hello')} />,
       tabBarLabel: 'Home'
     },
   },
@@ -68,11 +79,18 @@ const App = TabNavigator(
     backBehavior: "initialRoute",
     tabBarOptions: {
       activeTintColor: '#e91e63',
-      inactiveTintColor: '#000',
+      activeBackgroundColor: '#e91e63',
+      labelStyle: {
+          fontSize: 12,
+        },
+        style: {
+          backgroundColor: 'blue',
+        },
+      // inactiveTintColor: '#e91e63',
       showLabel: true,
       showIcon: true,
       upperCaseLabel: false,
-      pressColor: '#000',
+      // pressColor: '#000',
       scrollEnabled: false,
     }
   }
@@ -87,5 +105,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
+  },
+  icon: {
+    width: 26,
+    height: 26,
   },
 });
