@@ -6,7 +6,7 @@ import SignUp from './views/auth/signup';
 import Home from './views/main/home';
 import Profile from './views/main/profile';
 
-export const authNav = StackNavigator({
+const AuthNav = StackNavigator({
   Login: {
     screen: Login,
     navigationOptions: {
@@ -21,7 +21,7 @@ export const authNav = StackNavigator({
   }
 });
 
-export const mainNav = DrawerNavigator({
+const MainNav = DrawerNavigator({
   Home: {
     screen: Home,
   },
@@ -29,3 +29,29 @@ export const mainNav = DrawerNavigator({
     screen: Profile,
   },
 });
+
+const createRootNavigator = (signedIn = false) => {
+  return StackNavigator(
+    {
+      MainNav: {
+        screen: MainNav,
+        navigationOptions: {
+          gesturesEnabled: false
+        }
+      },
+      AuthNav: {
+        screen: AuthNav,
+        navigationOptions: {
+          gesturesEnabled: false
+        }
+      }
+    },
+    {
+      headerMode: "none",
+      mode: "modal",
+      initialRouteName: !signedIn ? "MainNav" : "AuthNav"
+    }
+  );
+};
+
+module.exports = { AuthNav, MainNav, createRootNavigator };

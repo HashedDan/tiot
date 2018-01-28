@@ -12,4 +12,4 @@ class SignUp extends Component {
   }
 }
 
-module.exports = Login;
+module.exports = SignUp;
