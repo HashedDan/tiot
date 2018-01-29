@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
 
 import Login from './views/auth/login';
 import SignUp from './views/auth/signup';
 import Home from './views/main/home';
 import Profile from './views/main/profile';
 
-const AuthNav = StackNavigator({
+const AuthNav = StackNavigator(
+{
   Login: {
     screen: Login,
     navigationOptions: {
@@ -18,8 +20,13 @@ const AuthNav = StackNavigator({
     navigationOptions: {
       title: "Sign Up",
     }
-  }
-});
+  },
+},
+{
+  // Options go here
+  // headerMode: 'none',
+}
+);
 
 const MainNav = DrawerNavigator({
   Home: {
