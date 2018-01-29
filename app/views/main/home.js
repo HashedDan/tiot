@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Button, Image } from 'react-native';
-import { Icon, Header } from 'react-native-elements';
+import { Icon, Header, Card } from 'react-native-elements';
 
 class Home extends Component {
   static navigationOptions = {
@@ -20,10 +20,6 @@ class Home extends Component {
                               source={require('../../assets/logo.png')} /> }
           outerContainerStyles={{ backgroundColor: '#000' }}
         />
-        <Button
-                onPress={() => this.props.navigation.navigate('DrawerToggle')}
-                title="Show Menu"
-              />
       </View>
     );
   }

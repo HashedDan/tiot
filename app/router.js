@@ -49,7 +49,7 @@ const createRootNavigator = (signedIn = false) => {
     {
       headerMode: "none",
       mode: "modal",
-      initialRouteName: !signedIn ? "MainNav" : "AuthNav"
+      initialRouteName: signedIn ? "MainNav" : "AuthNav"
     }
   );
 };
