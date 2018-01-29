@@ -13,6 +13,8 @@ const AuthNav = StackNavigator(
     screen: Login,
     navigationOptions: {
       title: "Log In",
+      headerStyle: { backgroundColor: '#000' },
+      headerTitleStyle: { color: 'white'},
     }
   },
   SignUp: {
