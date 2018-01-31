@@ -8,26 +8,26 @@ import Home from './views/main/home';
 import Profile from './views/main/profile';
 
 const AuthNav = StackNavigator(
-{
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      title: "Log In",
-      headerStyle: { backgroundColor: '#000' },
-      headerTitleStyle: { color: 'white'},
-    }
+  {
+    Login: {
+      screen: Login,
+      navigationOptions: {
+        title: "Log In",
+        headerStyle: { backgroundColor: '#000' },
+        headerTitleStyle: { color: 'white'},
+      }
+    },
+    SignUp: {
+      screen: SignUp,
+      navigationOptions: {
+        title: "Sign Up",
+      }
+    },
   },
-  SignUp: {
-    screen: SignUp,
-    navigationOptions: {
-      title: "Sign Up",
-    }
-  },
-},
-{
-  // Options go here
-  // headerMode: 'none',
-}
+  {
+    // Options go here
+    // headerMode: 'none',
+  }
 );
 
 const MainNav = DrawerNavigator({
