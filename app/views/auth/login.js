@@ -17,8 +17,9 @@ class Login extends Component {
   }
 
   async login() {
+    console.log("here1");
     try {
-
+      console.log("here");
       await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
 
       this.setState({
@@ -34,6 +35,7 @@ class Login extends Component {
       this.setState({
         response: error.toString(),
       })
+      console.log(error.toString());
     }
   }
 
@@ -63,7 +65,7 @@ class Login extends Component {
             backgroundColor='#03A9F4'
             fontFamily='Futura'
             buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10 }}
-            onPress={() => this.login}
+            onPress={() => this.login()}
             title='Log In' />
         </Card>
         <View style={{ marginTop: 20 }}>

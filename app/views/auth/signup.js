@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { View, Button, Image, Alert, Text } from 'react-native';
-import { Icon, Header } from 'react-native-elements';
+import { View, Image, Alert, Text } from 'react-native';
+import { Icon, Header, Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import * as firebase from "firebase";
 
 class SignUp extends Component {
@@ -13,16 +13,18 @@ class SignUp extends Component {
       response: ""
     };
 
-    this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
   }
 
   async signup() {
   	try {
-  		await firebase.auth().createUserWithEmailAndPassword(email, password);
+  		console.log("yo");
+  		await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
 
   		this.setState({
   		  response: "Successful Signup!"
   		});
+  		console.log("HERE");
 
   		setTimeout(() => {
   		  this.props.navigation.navigate('MainNav')
@@ -32,6 +34,7 @@ class SignUp extends Component {
   		this.setState({
   		  response: error.toString(),
   		})
+  		console.log(error.toString());
   	}
   }
 
@@ -60,8 +63,8 @@ class SignUp extends Component {
             backgroundColor='#03A9F4'
             fontFamily='Futura'
             buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10 }}
-            onPress={() => this.signup}
-            title='Log In' />
+            onPress={() => this.signup()}
+            title='Sign Up' />
         </Card>
       </View>
     );
