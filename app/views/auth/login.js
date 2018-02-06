@@ -1,8 +1,30 @@
 import React, {Component} from 'react';
 import { View, Image, Alert, Text } from 'react-native';
 import { Icon, Header, Card, Button, FormLabel, FormInput } from 'react-native-elements';
+import * as firebase from "firebase";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: "",
+      password: ""
+    };
+
+    this.login = this.login.bind(this);
+  }
+
+  async login() {
+    try {
+
+    }
+    catch (error) {
+
+    }
+  }
+
+
   render () {
     return (
       <View style={{ flex: 1, backgroundColor: '#000', alignItems: 'center' }}>
