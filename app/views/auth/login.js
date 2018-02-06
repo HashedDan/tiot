@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Image, Alert, Text } from 'react-native';
+import { View, Image, Alert, Text, ActivityIndicator } from 'react-native';
 import { Icon, Header, Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import * as firebase from "firebase";
 
@@ -49,7 +49,7 @@ class Login extends Component {
           <FormLabel>Email</FormLabel>
           <View>
             <FormInput
-              // containerStyle={{ width: 200}}
+              containerStyle={{ width: 200}}
               onChangeText={(email) => this.setState({email})} 
               keyboardType={'email-address'}
               autoCapitalize="none" />
@@ -57,7 +57,7 @@ class Login extends Component {
           <FormLabel>Password</FormLabel>
           <View>
             <FormInput
-              // containerStyle={{ width: 200}}
+              containerStyle={{ width: 200}}
               onChangeText={(password) => this.setState({password})}
               secureTextEntry={true}
               autoCapitalize="none" />
@@ -69,6 +69,7 @@ class Login extends Component {
             buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10 }}
             onPress={() => this.login()}
             title='Log In' />
+            <ActivityIndicator size="large" color="#0000ff" />
         </Card>
         <View style={{ marginTop: 20 }}>
           <Text style={{ color: 'white' }}>Don't have an account?</Text>
