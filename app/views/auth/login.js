@@ -10,7 +10,8 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      response: ""
+      response: "",
+      isVisible: false
     };
 
     this.login = this.login.bind(this);
@@ -18,6 +19,8 @@ class Login extends Component {
 
   async login() {
     try {
+      this.state.isVisible = true;
+
       await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
 
       this.setState({
@@ -27,12 +30,15 @@ class Login extends Component {
       setTimeout(() => {
         this.props.navigation.navigate('MainNav')
       }, 1500);
-     
+
+      this.state.isVisible = false;
     }
     catch (error) {
+      this.state.isVisible = false;
       this.setState({
         response: error.toString(),
       })
+      console.log(error.toString());
     }
   }
 
@@ -42,7 +48,7 @@ class Login extends Component {
       <View style={{ flex: 1, backgroundColor: '#000', alignItems: 'center' }}>
         <Card
           title='Welcome!'
-          style={{ marginLeft: 50 }}>
+          style={{ height: 400, width: 200}}>
           <Text style={{marginBottom: 10}}>
             Please login below to view your profile.
           </Text>
@@ -69,7 +75,9 @@ class Login extends Component {
             buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10 }}
             onPress={() => this.login()}
             title='Log In' />
-            <ActivityIndicator size="large" color="#0000ff" />
+            { this.state.isVisible &&
+              <ActivityIndicator size="large" color="#0000ff" />
+            }
         </Card>
         <View style={{ marginTop: 20 }}>
           <Text style={{ color: 'white' }}>Don't have an account?</Text>
