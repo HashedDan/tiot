@@ -17,9 +17,7 @@ class Login extends Component {
   }
 
   async login() {
-    console.log("here1");
     try {
-      console.log("here");
       await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
 
       this.setState({
@@ -35,7 +33,6 @@ class Login extends Component {
       this.setState({
         response: error.toString(),
       })
-      console.log(error.toString());
     }
   }
 
@@ -44,21 +41,26 @@ class Login extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: '#000', alignItems: 'center' }}>
         <Card
-          title='Welcome!'>
+          title='Welcome!'
+          style={{ marginLeft: 50 }}>
           <Text style={{marginBottom: 10}}>
             Please login below to view your profile.
           </Text>
           <FormLabel>Email</FormLabel>
           <View>
             <FormInput
-              containerStyle={{ width: 200}}
-              onChangeText={(email) => this.setState({email})} />
+              // containerStyle={{ width: 200}}
+              onChangeText={(email) => this.setState({email})} 
+              keyboardType={'email-address'}
+              autoCapitalize="none" />
           </View>
           <FormLabel>Password</FormLabel>
           <View>
             <FormInput
-              containerStyle={{ width: 200}}
-              onChangeText={(password) => this.setState({password})} />
+              // containerStyle={{ width: 200}}
+              onChangeText={(password) => this.setState({password})}
+              secureTextEntry={true}
+              autoCapitalize="none" />
           </View>
           <Button
             icon={{name: 'code'}}

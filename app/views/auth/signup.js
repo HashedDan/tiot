@@ -18,13 +18,11 @@ class SignUp extends Component {
 
   async signup() {
   	try {
-  		console.log("yo");
   		await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
 
   		this.setState({
   		  response: "Successful Signup!"
   		});
-  		console.log("HERE");
 
   		setTimeout(() => {
   		  this.props.navigation.navigate('MainNav')
@@ -34,7 +32,6 @@ class SignUp extends Component {
   		this.setState({
   		  response: error.toString(),
   		})
-  		console.log(error.toString());
   	}
   }
 
