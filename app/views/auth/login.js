@@ -18,7 +18,17 @@ class Login extends Component {
 
   async login() {
     try {
+
       await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
+
+      this.setState({
+        response: "Successful Login"
+      });
+
+      setTimeout(() => {
+        this.props.navigation.navigate('MainNav')
+      }, 1500);
+     
     }
     catch (error) {
       this.setState({
@@ -38,18 +48,22 @@ class Login extends Component {
           </Text>
           <FormLabel>Email</FormLabel>
           <View>
-            <FormInput containerStyle={{ width: 200}}/>
+            <FormInput
+              containerStyle={{ width: 200}}
+              onChangeText={(email) => this.setState({email})} />
           </View>
           <FormLabel>Password</FormLabel>
           <View>
-            <FormInput containerStyle={{ width: 200}}/>
+            <FormInput
+              containerStyle={{ width: 200}}
+              onChangeText={(password) => this.setState({password})} />
           </View>
           <Button
             icon={{name: 'code'}}
             backgroundColor='#03A9F4'
             fontFamily='Futura'
             buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10 }}
-            onPress={() => this.props.navigation.navigate('MainNav')}
+            onPress={() => this.login}
             title='Log In' />
         </Card>
         <View style={{ marginTop: 20 }}>
