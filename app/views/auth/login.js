@@ -9,7 +9,8 @@ class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      response: ""
     };
 
     this.login = this.login.bind(this);
@@ -17,10 +18,12 @@ class Login extends Component {
 
   async login() {
     try {
-
+      await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
     }
     catch (error) {
-
+      this.setState({
+        response: error.toString();
+      })
     }
   }
 
