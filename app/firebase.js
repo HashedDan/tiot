@@ -1,14 +1,15 @@
 import * as firebase from 'firebase';
+var Environment = require('./environment.js');
 
 class Firebase {
     static initialize() {
         firebase.initializeApp({
-            apiKey: process.env.API_KEY,
-            authDomain: process.env.AUTH_DOMAIN,
-            databaseURL: process.env.DATABASE_URL,
-            projectId: process.env.PROJECT_ID,
-            storageBucket: process.env.STORAGE_BUCKET,
-            messagingSenderId: process.env.MESSAGING_SENDER_ID
+            apiKey: Environment.API_KEY,
+            authDomain: Environment.AUTH_DOMAIN,
+            databaseURL: Environment.DATABASE_URL,
+            projectId: Environment.PROJECT_ID,
+            storageBucket: Environment.STORAGE_BUCKET,
+            messagingSenderId: Environment.MESSAGING_SENDER_ID
         });
     }
 }
