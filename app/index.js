@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
-
 import { createRootNavigator } from './router.js';
+import * as firebase from "firebase";
+import Firebase from "./firebase";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+
+    Firebase.initialize();
 
     this.state = {
       signedIn: false,
@@ -14,18 +17,25 @@ export default class App extends React.Component {
 
   componentWillMount() {
   	console.log(this.state.signedIn);
-    // isSignedIn()
-    //   .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
-    //   .catch(err => alert("An error occurred"));
+  	console.log();
+  	firebase.auth.onAuthStateChanged((user) => {
+  		if (user) {
+  			this.state.signedIn = true;
+  			this.state.checkedSignIn = true;
+  		}
+  		else {
+  			this.state.checkedSignIn = true;
+  		}
+  	});
   }
 
   render() {
     const { checkedSignIn, signedIn } = this.state;
 
     // // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
-    // if (!checkedSignIn) {
-    //   return null;
-    // }
+    if (!checkedSignIn) {
+      return null;
+    }
 
     const Layout = createRootNavigator(signedIn);
     return <Layout />;
