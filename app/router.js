@@ -53,7 +53,7 @@ const createRootNavigator = (signedIn = false) => {
         navigationOptions: {
           gesturesEnabled: false
         }
-      }
+      },
     },
     {
       headerMode: "none",

@@ -13,29 +13,30 @@ export default class App extends React.Component {
       signedIn: false,
       checkedSignIn: false
     };
+
+    this.getAuthInfo();
+    this.getAuthInfo = this.getAuthInfo.bind(this);
   }
 
-  componentWillMount() {
+  getAuthInfo() {
   	console.log(this.state.signedIn);
-  	console.log();
-  	firebase.auth.onAuthStateChanged((user) => {
+  	firebase.auth().onAuthStateChanged((user) => {
   		if (user) {
   			this.state.signedIn = true;
   			this.state.checkedSignIn = true;
+  			console.log("one");
   		}
   		else {
+  			this.state.signedIn = true;
+
   			this.state.checkedSignIn = true;
+  			console.log("two");
   		}
   	});
   }
 
   render() {
     const { checkedSignIn, signedIn } = this.state;
-
-    // // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
-    if (!checkedSignIn) {
-      return null;
-    }
 
     const Layout = createRootNavigator(signedIn);
     return <Layout />;

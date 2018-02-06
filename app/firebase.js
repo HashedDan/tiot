@@ -3,6 +3,7 @@ var Environment = require('./environment.js');
 
 class Firebase {
     static initialize() {
+      console.log(Environment.API_KEY);
         firebase.initializeApp({
             apiKey: Environment.API_KEY,
             authDomain: Environment.AUTH_DOMAIN,
@@ -13,3 +14,5 @@ class Firebase {
         });
     }
 }
+
+module.exports = Firebase;

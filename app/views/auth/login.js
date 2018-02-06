@@ -32,7 +32,7 @@ class Login extends Component {
     }
     catch (error) {
       this.setState({
-        response: error.toString();
+        response: error.toString(),
       })
     }
   }
