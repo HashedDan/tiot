@@ -23,7 +23,6 @@ class Login extends Component {
 
       await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
       
-
       this.setState({
         response: "Successful Login"
       });
