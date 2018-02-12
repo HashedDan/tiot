@@ -27,7 +27,6 @@ class Login extends Component {
         response: "Successful Login"
       });
 
-
       setTimeout(() => {
         this.props.navigation.navigate('MainNav')
       }, 1500);
