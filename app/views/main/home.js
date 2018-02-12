@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { View, Button, Image } from 'react-native';
 import { Icon, Header, Card } from 'react-native-elements';
+import * as firebase from "firebase";
 
 class Home extends Component {
   static navigationOptions = {
@@ -8,6 +9,7 @@ class Home extends Component {
     drawerIcon: ({ tintColor }) => <Icon name='home' size={24} />,
   };
   render () {
+    console.log(firebase.auth().currentUser);
     return (
       <View style={{ flex: 1, backgroundColor: '#fff'}}>
         <Header
