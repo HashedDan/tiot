@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Button, Image } from 'react-native';
+import { View, Button, Image, Text } from 'react-native';
 import { Icon, Header, Card } from 'react-native-elements';
 import * as firebase from "firebase";
 
@@ -8,8 +8,15 @@ class Home extends Component {
     drawerLabel: 'Home',
     drawerIcon: ({ tintColor }) => <Icon name='home' size={24} />,
   };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      person: firebase.auth().currentUser.email
+    };
+  }
   render () {
-    console.log(firebase.auth().currentUser);
+    console.log(firebase.auth().currentUser.email);
     return (
       <View style={{ flex: 1, backgroundColor: '#fff'}}>
         <Header
@@ -22,6 +29,7 @@ class Home extends Component {
                               source={require('../../assets/logo.png')} /> }
           outerContainerStyles={{ backgroundColor: '#000' }}
         />
+        <Text>{ this.state.person }</Text>
       </View>
     );
   }
