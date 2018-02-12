@@ -47,13 +47,17 @@ class SignUp extends Component {
           <View>
             <FormInput
               containerStyle={{ width: 200}}
-              onChangeText={(email) => this.setState({email})} />
+              onChangeText={(email) => this.setState({email})} 
+              keyboardType={'email-address'}
+              autoCapitalize="none" />
           </View>
           <FormLabel>Password</FormLabel>
           <View>
             <FormInput
               containerStyle={{ width: 200}}
-              onChangeText={(password) => this.setState({password})} />
+              onChangeText={(password) => this.setState({password})}
+              secureTextEntry={true}
+              autoCapitalize="none" />
           </View>
           <Button
             icon={{name: 'code'}}
