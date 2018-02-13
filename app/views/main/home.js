@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { View, Button, Image, Text } from 'react-native';
-import { Icon, Header, Card } from 'react-native-elements';
+import { View, Button, Image, Text, ListView, StatusBar } from 'react-native';
+import { Icon, Header, Card, List, ListItem } from 'react-native-elements';
 import * as firebase from "firebase";
 
 class Home extends Component {
@@ -12,9 +12,30 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      person: firebase.auth().currentUser.email
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      })
     };
   }
+
+  componentDidMount() {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }, {title: 'Spaghetti'}])
+    })
+  }
+
+  renderRow (rowData, sectionID) {
+    return (
+      <ListItem
+        roundAvatar
+        key={sectionID}
+        title={rowData.title}
+        subtitle={rowData.subtitle}
+        avatar={{uri:rowData.avatar_url}}
+      />
+    )
+  }
+
   render () {
     console.log(firebase.auth().currentUser.email);
     return (
@@ -29,7 +50,11 @@ class Home extends Component {
                               source={require('../../assets/logo.png')} /> }
           outerContainerStyles={{ backgroundColor: '#000' }}
         />
-        <Text>{ this.state.person }</Text>
+        <Text>Hot Players Right Now</Text>
+        <ListView
+          renderRow={this.renderRow}
+          dataSource={this.state.dataSource}
+        />
       </View>
     );
   }
