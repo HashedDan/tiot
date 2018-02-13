@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { View, Button, Image, Text, ListView, StatusBar } from 'react-native';
 import { Icon, Header, Card, List, ListItem } from 'react-native-elements';
 import * as firebase from "firebase";
+import Firebase from "../../firebase";
 
 class Home extends Component {
   static navigationOptions = {
@@ -16,12 +17,34 @@ class Home extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
+
+    this.itemsRef = firebase.database().ref('players/');
   }
 
   componentDidMount() {
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }, {title: 'Spaghetti'}])
-    })
+    this.listenForItems(this.itemsRef);
+  }
+
+  listenForItems(itemsRef) {
+    itemsRef.on('value', (snap) => {
+
+      // get children as an array
+      var items = [];
+      snap.forEach((child) => {
+        items.push({
+          name: child.val().name,
+          position: child.val().position,
+          team: child.val().team,
+          picUrl: child.val().picture,
+          _key: child.key
+        });
+      });
+
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(items)
+      });
+
+    });
   }
 
   renderRow (rowData, sectionID) {
@@ -29,9 +52,9 @@ class Home extends Component {
       <ListItem
         roundAvatar
         key={sectionID}
-        title={rowData.title}
-        subtitle={rowData.subtitle}
-        avatar={{uri:rowData.avatar_url}}
+        title={rowData.name}
+        subtitle={rowData.position + ', ' + rowData.team}
+        avatar={{uri:rowData.picUrl}}
       />
     )
   }
@@ -50,7 +73,7 @@ class Home extends Component {
                               source={require('../../assets/logo.png')} /> }
           outerContainerStyles={{ backgroundColor: '#000' }}
         />
-        <Text>Hot Players Right Now</Text>
+        <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Hot Players Right Now</Text>
         <ListView
           renderRow={this.renderRow}
           dataSource={this.state.dataSource}
