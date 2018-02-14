@@ -71,8 +71,13 @@ class Home extends Component {
           centerComponent={ /*<Image
                               style={{width: 55, height: 20}}
                               source={require('../../assets/logo.png')} />*/ 
-                              <Text style={{color: 'white'}}>Draftnik</Text>
+                              <Text style={{color: 'white', fontSize: 30 }}>Draftnik</Text>
                             }
+          rightComponent={ <Icon
+                            type='entypo'
+                            name='squared-plus'
+                            color='#fff'
+                            onPress={() => this.props.navigation.navigate('DrawerToggle')} /> }
           outerContainerStyles={{ backgroundColor: '#000' }}
         />
         <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Hot Players Right Now</Text>
