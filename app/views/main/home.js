@@ -68,9 +68,11 @@ class Home extends Component {
                             name='menu'
                             color='#fff'
                             onPress={() => this.props.navigation.navigate('DrawerToggle')} /> }
-          centerComponent={ <Image
+          centerComponent={ /*<Image
                               style={{width: 55, height: 20}}
-                              source={require('../../assets/logo.png')} /> }
+                              source={require('../../assets/logo.png')} />*/ 
+                              <Text style={{color: 'white'}}>Draftnik</Text>
+                            }
           outerContainerStyles={{ backgroundColor: '#000' }}
         />
         <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Hot Players Right Now</Text>

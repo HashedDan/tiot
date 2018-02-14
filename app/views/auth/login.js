@@ -4,6 +4,12 @@ import { Icon, Header, Card, Button, FormLabel, FormInput } from 'react-native-e
 import * as firebase from "firebase";
 
 class Login extends Component {
+  static navigationOptions = {
+    title: "Log In",
+    headerStyle: { backgroundColor: '#000' },
+    headerTitleStyle: { color: 'white'},
+  };
+
   constructor(props) {
     super(props);
 
@@ -42,14 +48,11 @@ class Login extends Component {
     }
   }
 
-
   render () {
     return (
       <View style={{ flex: 1, backgroundColor: '#000', alignItems: 'center' }}>
-        <Card
-          title='Welcome!'
-          style={{ height: 400, width: 200}}>
-          <Text style={{marginBottom: 10}}>
+        
+          <Text style={{marginBottom: 10, paddingTop: 70, color: 'white'}}>
             Please login below to view your profile.
           </Text>
           <FormLabel>Email</FormLabel>
@@ -78,7 +81,7 @@ class Login extends Component {
             { this.state.isVisible &&
               <ActivityIndicator size="large" color="#0000ff" />
             }
-        </Card>
+        
         <View style={{ marginTop: 20 }}>
           <Text style={{ color: 'white' }}>Don't have an account?</Text>
           <Button
