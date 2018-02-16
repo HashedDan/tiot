@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Button, Image, Text, ListView, StatusBar } from 'react-native';
+import { View, Button, Image, Text, ListView, StatusBar, Alert } from 'react-native';
 import { Icon, Header, Card, List, ListItem } from 'react-native-elements';
 import * as firebase from "firebase";
 import Firebase from "../../firebase";
@@ -55,10 +55,15 @@ class Home extends Component {
         title={rowData.name}
         subtitle={rowData.position + ', ' + rowData.team}
         avatar={{uri:rowData.picUrl}}
+        avatarContainerStyle={{paddingRight: 10}}
+        leftIcon={{name: 'chevron-up', type: 'entypo'}}
+        leftIconOnPress={() => Alert.alert("Move me up :)")}
+        rightIcon={{name: 'chevron-down', type: 'entypo'}}
+        onPressRightIcon={() => Alert.alert("Move me down :(")}
       />
     )
   }
-  
+
 
   render () {
     console.log(firebase.auth().currentUser.email);
