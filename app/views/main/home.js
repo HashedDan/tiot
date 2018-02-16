@@ -51,15 +51,11 @@ class Home extends Component {
     return (
       <ListItem
         roundAvatar
-        key={sectionID}
+        key={rowData._key}
         title={rowData.name}
         subtitle={rowData.position + ', ' + rowData.team}
         avatar={{uri:rowData.picUrl}}
-        avatarContainerStyle={{paddingRight: 10}}
-        leftIcon={{name: 'chevron-up', type: 'entypo'}}
-        leftIconOnPress={() => Alert.alert("Move me up :)")}
-        rightIcon={{name: 'chevron-down', type: 'entypo'}}
-        onPressRightIcon={() => Alert.alert("Move me down :(")}
+        onPressRightIcon={() => Alert.alert("More info on " + rowData._key)}
       />
     )
   }
@@ -79,11 +75,11 @@ class Home extends Component {
                               source={require('../../assets/logo.png')} />*/ 
                               <Text style={{color: 'white', fontSize: 30 }}>Draftnik</Text>
                             }
-          rightComponent={ <Icon
-                            type='entypo'
-                            name='squared-plus'
-                            color='#fff'
-                            onPress={() => this.props.navigation.navigate('DrawerToggle')} /> }
+          // rightComponent={ <Icon
+          //                   type='entypo'
+          //                   name='squared-plus'
+          //                   color='#fff'
+          //                   onPress={() => this.props.navigation.navigate('Builder')} /> }
           outerContainerStyles={{ backgroundColor: '#000' }}
         />
         <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Hot Players Right Now</Text>

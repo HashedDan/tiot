@@ -6,6 +6,7 @@ import Login from './views/auth/login';
 import SignUp from './views/auth/signup';
 import Home from './views/main/home';
 import Profile from './views/main/profile';
+import Builder from './views/main/builder';
 
 const AuthNav = StackNavigator(
   {
@@ -33,6 +34,9 @@ const MainNav = DrawerNavigator({
   },
   Profile: {
     screen: Profile,
+  },
+  Builder: {
+    screen: Builder,
   },
 });
 
