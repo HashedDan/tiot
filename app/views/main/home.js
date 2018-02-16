@@ -58,6 +58,7 @@ class Home extends Component {
       />
     )
   }
+  
 
   render () {
     console.log(firebase.auth().currentUser.email);
