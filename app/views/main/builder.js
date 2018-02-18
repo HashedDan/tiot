@@ -22,6 +22,7 @@ class Builder extends Component {
     this.itemsRef = firebase.database().ref('players/');
 
     this.renderRow = this.renderRow.bind(this);
+    this.updateRow = this.updateRow.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +32,27 @@ class Builder extends Component {
         pickNumber: x,
         _key: ''
       })
+    }
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(items)
+    });
+  }
+
+  updateRow(val) {
+    var items = [];
+    for (var x = 1; x <= 30; ++x) {
+      if (x == val) {
+        items.push({
+          pickNumber: x + 1,
+          _key: ''
+        })
+      }
+      else {
+        items.push({
+          pickNumber: x,
+          _key: ''
+        })
+      }
     }
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(items)
@@ -49,7 +71,7 @@ class Builder extends Component {
         leftIcon={{name: 'chevron-up', type: 'entypo'}}
         leftIconOnPress={() => Alert.alert("Move me up :)")}
         rightIcon={{name: 'chevron-down', type: 'entypo'}}
-        onPressRightIcon={() => console.log(this.state.aVal)}
+        onPressRightIcon={() => this.updateRow(rowData.pickNumber)}
       />
     )
   }
