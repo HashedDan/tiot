@@ -15,10 +15,13 @@ class Builder extends Component {
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
-      })
+      }),
+      aVal: 'hey'
     };
 
     this.itemsRef = firebase.database().ref('players/');
+
+    this.renderRow = this.renderRow.bind(this);
   }
 
   componentDidMount() {
@@ -31,29 +34,6 @@ class Builder extends Component {
     }
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(items)
-    });
-    // this.listenForItems(this.itemsRef);
-  }
-
-  listenForItems(itemsRef) {
-    itemsRef.on('value', (snap) => {
-
-      // get children as an array
-      var items = [];
-      snap.forEach((child) => {
-        items.push({
-          name: child.val().name,
-          position: child.val().position,
-          team: child.val().team,
-          picUrl: child.val().picture,
-          _key: child.key
-        });
-      });
-
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(items)
-      });
-
     });
   }
 
@@ -69,7 +49,7 @@ class Builder extends Component {
         leftIcon={{name: 'chevron-up', type: 'entypo'}}
         leftIconOnPress={() => Alert.alert("Move me up :)")}
         rightIcon={{name: 'chevron-down', type: 'entypo'}}
-        onPressRightIcon={() => rowData.pickNumber++}
+        onPressRightIcon={() => console.log(this.state.aVal)}
       />
     )
   }
@@ -86,7 +66,11 @@ class Builder extends Component {
                             onPress={() => this.props.navigation.navigate('DrawerToggle')} /> }
           outerContainerStyles={{ backgroundColor: '#000' }}
         />
-        <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Mock Draft xxxx</Text>
+        <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{this.state.aVal}</Text>
+        <Button
+                onPress={() => this.setState({aVal: 'yo'})}
+                title="Change Name"
+              />
         <ListView
           renderRow={this.renderRow}
           dataSource={this.state.dataSource}
