@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Button, Image, Text, ListView, StatusBar, Alert } from 'react-native';
+import { View, Button, Image, Text, FlatList, StatusBar, Alert } from 'react-native';
 import { Icon, Header, Card, List, ListItem } from 'react-native-elements';
 import * as firebase from "firebase";
 import Firebase from "../../firebase";
@@ -12,11 +12,22 @@ class Builder extends Component {
   constructor(props) {
     super(props);
 
+    var items = [];
+    for (var x = 1; x <= 30; ++x) {
+      items.push({
+        pickNumber: x,
+        key: x-1
+      })
+    }
+
+    // var ds = new ListView.DataSource({
+    //     rowHasChanged: (row1, row2) => row1.pickNumber !== row2.pickNumber,
+    // });
+
     this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-      aVal: 'hey'
+      dataSource: items,
+      aVal: 'hey',
+      items: items
     };
 
     this.itemsRef = firebase.database().ref('players/');
@@ -26,36 +37,26 @@ class Builder extends Component {
   }
 
   componentDidMount() {
-    var items = [];
-    for (var x = 1; x <= 30; ++x) {
-      items.push({
-        pickNumber: x,
-        _key: ''
-      })
-    }
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(items)
-    });
+    console.log("HERE");
   }
 
-  updateRow(val) {
-    var items = [];
-    for (var x = 1; x <= 30; ++x) {
-      if (x == val) {
-        items.push({
-          pickNumber: x + 1,
-          _key: ''
-        })
-      }
-      else {
-        items.push({
-          pickNumber: x,
-          _key: ''
-        })
-      }
+  updateRow(val, up) {
+    console.log(this.state.items[val]);
+    console.log(val);
+    var newItems = [];
+    newItems = this.state.items.slice();
+    if (up) {
+      newItems[val].pickNumber--;
     }
+    else {
+      console.log(val)
+      console.log(newItems[val].key);
+      newItems[val].pickNumber++;
+    }
+
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(items)
+      dataSource: this.state.dataSource.cloneWithRows(newItems),
+      items: newItems
     });
   }
 
@@ -63,7 +64,7 @@ class Builder extends Component {
     return (
       <ListItem
         roundAvatar
-        key={rowData._key}
+        key={rowData.key}
         title={rowData.pickNumber}
         subtitle={'Fill me!'}
         // avatar={{uri:rowData.picUrl}}
@@ -71,7 +72,7 @@ class Builder extends Component {
         leftIcon={{name: 'chevron-up', type: 'entypo'}}
         leftIconOnPress={() => Alert.alert("Move me up :)")}
         rightIcon={{name: 'chevron-down', type: 'entypo'}}
-        onPressRightIcon={() => this.updateRow(rowData.pickNumber)}
+        onPressRightIcon={() => this.updateRow(rowData.key, false)}
       />
     )
   }
@@ -93,9 +94,9 @@ class Builder extends Component {
                 onPress={() => this.setState({aVal: 'yo'})}
                 title="Change Name"
               />
-        <ListView
-          renderRow={this.renderRow}
-          dataSource={this.state.dataSource}
+        <FlatList
+          renderItem={this.renderRow}
+          data={this.state.dataSource}
         />
       </View>
     );
