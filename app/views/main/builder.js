@@ -55,7 +55,7 @@ class Builder extends Component {
     }
 
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(newItems),
+      dataSource: newItems,
       items: newItems
     });
   }
