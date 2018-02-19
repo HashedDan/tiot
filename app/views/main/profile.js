@@ -4,8 +4,7 @@ import { Icon, Header } from 'react-native-elements';
 
 class Profile extends Component {
   static navigationOptions = {
-    drawerLabel: 'Profile',
-    drawerIcon: ({ tintColor }) => <Icon name='ios-person' type="ionicon" size={24} />,
+    title: 'Profile',
   };
   render () {
     return (

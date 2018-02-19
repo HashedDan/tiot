@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import { View, Button, Image, Text, FlatList, StatusBar, Alert } from 'react-native';
+import { View, Button, Image, Text, FlatList, StatusBar, Alert, StyleSheet } from 'react-native';
 import { Icon, Header, Card, List, ListItem } from 'react-native-elements';
+import ActionButton from 'react-native-action-button';
 import * as firebase from "firebase";
 import Firebase from "../../firebase";
 
 class Builder extends Component {
   static navigationOptions = {
-    drawerLabel: 'Builder',
-    drawerIcon: ({ tintColor }) => <Icon name='md-hammer' type='ionicon' size={24} />,
+    title: 'Builder',
   };
   constructor(props) {
     super(props);
@@ -32,7 +32,7 @@ class Builder extends Component {
 
     this.itemsRef = firebase.database().ref('players/');
 
-    this.renderRow = this.renderRow.bind(this);
+    this.renderItem = this.renderItem.bind(this);
     this.updateRow = this.updateRow.bind(this);
   }
 
@@ -41,38 +41,40 @@ class Builder extends Component {
   }
 
   updateRow(val, up) {
-    console.log(this.state.items[val]);
     console.log(val);
-    var newItems = [];
-    newItems = this.state.items.slice();
-    if (up) {
-      newItems[val].pickNumber--;
-    }
-    else {
-      console.log(val)
-      console.log(newItems[val].key);
-      newItems[val].pickNumber++;
-    }
+    console.log(up);
+    // console.log(this.state.items[val]);
+    // console.log(val);
+    // var newItems = [];
+    // newItems = this.state.items.slice();
+    // if (up) {
+    //   newItems[val].pickNumber--;
+    // }
+    // else {
+    //   console.log(val)
+    //   console.log(newItems[val].key);
+    //   newItems[val].pickNumber++;
+    // }
 
-    this.setState({
-      dataSource: newItems,
-      items: newItems
-    });
+    // this.setState({
+    //   dataSource: newItems,
+    //   items: newItems
+    // });
   }
 
-  renderRow (rowData, sectionID) {
+  renderItem ({item}) {
     return (
       <ListItem
         roundAvatar
-        key={rowData.key}
-        title={rowData.pickNumber}
+        key={item.key}
+        title={item.pickNumber}
         subtitle={'Fill me!'}
-        // avatar={{uri:rowData.picUrl}}
+        // avatar={{uri:item.picUrl}}
         // avatarContainerStyle={{paddingRight: 10}}
         leftIcon={{name: 'chevron-up', type: 'entypo'}}
-        leftIconOnPress={() => Alert.alert("Move me up :)")}
+        leftIconOnPress={() => this.updateRow(item.key, true)}
         rightIcon={{name: 'chevron-down', type: 'entypo'}}
-        onPressRightIcon={() => this.updateRow(rowData.key, false)}
+        onPressRightIcon={() => this.updateRow(item.key, false)}
       />
     )
   }
@@ -82,25 +84,37 @@ class Builder extends Component {
     console.log(firebase.auth().currentUser.email);
     return (
       <View style={{ flex: 1, backgroundColor: '#fff'}}>
-        <Header
-          leftComponent={ <Icon
-                            name='menu'
-                            color='#fff'
-                            onPress={() => this.props.navigation.navigate('DrawerToggle')} /> }
-          outerContainerStyles={{ backgroundColor: '#000' }}
-        />
         <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{this.state.aVal}</Text>
         <Button
                 onPress={() => this.setState({aVal: 'yo'})}
                 title="Change Name"
               />
         <FlatList
-          renderItem={this.renderRow}
           data={this.state.dataSource}
+          renderItem={this.renderItem}
         />
+        <ActionButton buttonColor="rgba(0,0,0,1)" bgColor="rgba(255,250,240,1)">
+          <ActionButton.Item buttonColor='#9b59b6' title="Home" onPress={() => console.log("notes tapped!")}>
+            <Icon name='home' style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor='#3498db' title="Profile" onPress={() => this.props.navigation.navigate('Profile')}>
+            <Icon name='person' style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor='#1abc9c' title="Builder" onPress={() => this.props.navigation.navigate('Builder')}>
+            <Icon name='build' style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
+  },
+});
 
 module.exports = Builder;

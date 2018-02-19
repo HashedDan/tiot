@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator, TabNavigator } from 'react-navigation';
 import { Icon, Button } from 'react-native-elements';
 
 import Login from './views/auth/login';
@@ -28,7 +28,8 @@ const AuthNav = StackNavigator(
   }
 );
 
-const MainNav = DrawerNavigator({
+const MainNav = TabNavigator(
+{
   Home: {
     screen: Home,
   },
@@ -37,6 +38,11 @@ const MainNav = DrawerNavigator({
   },
   Builder: {
     screen: Builder,
+  },
+},
+{
+  navigationOptions: {
+    tabBarVisible: false,
   },
 });
 
