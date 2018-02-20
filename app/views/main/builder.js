@@ -27,6 +27,7 @@ class Builder extends Component {
 
     this.state = {
       dataSource: items,
+      aVal: "hey",
       items: items
     };
 
@@ -43,12 +44,12 @@ class Builder extends Component {
   updateRow(val, up) {
     var newItems = [];
     newItems = this.state.items.slice();
-    if (up) {
+    if (up && newItems[val].pickNumber != 1) {
       console.log(val)
       console.log(newItems[val].key);
       newItems[val].pickNumber--;
     }
-    else {
+    else if (!up) {
       console.log(val)
       console.log(newItems[val].key);
       newItems[val].pickNumber++;
@@ -67,6 +68,7 @@ class Builder extends Component {
         key={item.key}
         title={item.pickNumber + ". " + item.playerName}
         subtitle={'Fill me!'}
+        onPress={() => Alert.alert("TEST")}
         // avatar={{uri:item.picUrl}}
         // avatarContainerStyle={{paddingRight: 10}}
         leftIcon={{name: 'chevron-up', type: 'entypo'}}
