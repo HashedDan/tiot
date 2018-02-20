@@ -94,7 +94,7 @@ class Builder extends Component {
           renderItem={this.renderItem}
         />
         <ActionButton buttonColor="rgba(0,0,0,1)" bgColor="rgba(255,250,240,1)">
-          <ActionButton.Item buttonColor='#9b59b6' title="Home" onPress={() => console.log("notes tapped!")}>
+          <ActionButton.Item buttonColor='#9b59b6' title="Home" onPress={() => this.props.navigation.navigate('Home')}>
             <Icon name='home' style={styles.actionButtonIcon} />
           </ActionButton.Item>
           <ActionButton.Item buttonColor='#3498db' title="Profile" onPress={() => this.props.navigation.navigate('Profile')}>
