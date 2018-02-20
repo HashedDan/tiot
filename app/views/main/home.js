@@ -64,14 +64,20 @@ class Home extends Component {
     console.log(firebase.auth().currentUser.email);
     return (
       <View style={{ flex: 1, backgroundColor: '#fff', paddingTop: 20}}>
-        <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Hot Players Right Now</Text>
+        <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Most Drafted Players</Text>
         <FlatList
           data={this.state.dataSource}
           renderItem={this.renderItem}
         />
 
-        <ActionButton buttonColor="rgba(0,0,0,1)" bgColor="rgba(255,250,240,1)">
-          <ActionButton.Item buttonColor='#9b59b6' title="Home" onPress={() => console.log("notes tapped!")}>
+        <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{flex: 1, alignItems: 'center'}}>
+          <Image
+                    style={{flex: 1}}
+                    source={require('../../assets/MenuBG2.jpg')}
+                  />
+
+        </View>}>
+          <ActionButton.Item buttonColor='#9b59b6' title="Home" onPress={() => this.props.navigation.navigate('Home')}>
             <Icon name='home' style={styles.actionButtonIcon} />
           </ActionButton.Item>
           <ActionButton.Item buttonColor='#3498db' title="Profile" onPress={() => this.props.navigation.navigate('Profile')}>

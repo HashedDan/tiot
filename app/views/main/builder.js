@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Button, Image, Text, FlatList, StatusBar, Alert, StyleSheet } from 'react-native';
+import { View, Button, Image, Text, FlatList, StatusBar, Alert, StyleSheet, Modal } from 'react-native';
 import { Icon, Header, Card, List, ListItem } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import * as firebase from "firebase";
@@ -17,7 +17,7 @@ class Builder extends Component {
       items.push({
         pickNumber: x,
         key: x-1,
-        playerName: "Johnny Appleseed"
+        playerName: x + "Some Guy",
       })
     }
 
@@ -28,7 +28,8 @@ class Builder extends Component {
     this.state = {
       dataSource: items,
       aVal: "hey",
-      items: items
+      items: items,
+      isVisible: false,
     };
 
     this.itemsRef = firebase.database().ref('players/');
@@ -53,12 +54,24 @@ class Builder extends Component {
       console.log(val)
       console.log(newItems[val].key);
       newItems[val].pickNumber++;
+      newItems[val].key++;
+      newItems[val+1].key--;
     }
 
+    console.log(newItems[val].key);
+    console.log(newItems[val+1].key);
     this.setState({
       dataSource: newItems,
       items: newItems
     });
+  }
+
+  openModal() {
+    this.setState({isVisible:true});
+  }
+
+  closeModal() {
+    this.setState({isVisible:false});
   }
 
   renderItem ({item}) {
@@ -68,7 +81,7 @@ class Builder extends Component {
         key={item.key}
         title={item.pickNumber + ". " + item.playerName}
         subtitle={'Fill me!'}
-        onPress={() => Alert.alert("TEST")}
+        onPress={() => this.openModal()}
         // avatar={{uri:item.picUrl}}
         // avatarContainerStyle={{paddingRight: 10}}
         leftIcon={{name: 'chevron-up', type: 'entypo'}}
@@ -83,7 +96,23 @@ class Builder extends Component {
   render () {
     console.log(firebase.auth().currentUser.email);
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff'}}>
+      <View style={{ flex: 1, backgroundColor: '#fff', paddingTop: 20 }}>
+        <Modal
+            visible={this.state.isVisible}
+            animationType={'slide'}
+            onRequestClose={() => this.closeModal()}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.innerContainer}>
+              <Text>This is content inside of modal component</Text>
+              <Button
+                  onPress={() => this.closeModal()}
+                  title="Close modal"
+              >
+              </Button>
+            </View>
+          </View>
+        </Modal>
         <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{this.state.aVal}</Text>
         <Button
                 onPress={() => this.setState({aVal: 'yo'})}
@@ -93,10 +122,10 @@ class Builder extends Component {
           data={this.state.dataSource}
           renderItem={this.renderItem}
         />
-        <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{flex: 1}}>
+        <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{flex: 1, alignItems: 'center'}}>
           <Image
                     style={{flex: 1}}
-                    source={require('../../assets/MenuBG.jpg')}
+                    source={require('../../assets/MenuBG2.jpg')}
                   />
 
         </View>}>
@@ -120,6 +149,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     height: 22,
     color: 'white',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'grey',
+  },
+  innerContainer: {
+    alignItems: 'center',
   },
 });
 
