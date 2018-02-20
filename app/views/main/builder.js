@@ -93,7 +93,7 @@ class Builder extends Component {
           data={this.state.dataSource}
           renderItem={this.renderItem}
         />
-        <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{position:'absolute',top:0,left:0,height: 800, width: 300}}>
+        <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{flex: 1, alignItems: 'stretch'}}>
           <Image
                     style={{flex: 1}}
                     source={{uri: 'https://wallpapershome.com/images/pages/pic_h/15707.jpg'}}
