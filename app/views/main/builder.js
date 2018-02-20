@@ -93,7 +93,13 @@ class Builder extends Component {
           data={this.state.dataSource}
           renderItem={this.renderItem}
         />
-        <ActionButton buttonColor="rgba(0,0,0,1)" bgColor="rgba(255,250,240,1)">
+        <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{position:'absolute',top:0,left:0,height: 800, width: 300}}>
+          <Image
+                    style={{flex: 1}}
+                    source={{uri: 'https://wallpapershome.com/images/pages/pic_h/15707.jpg'}}
+                  />
+
+        </View>}>
           <ActionButton.Item buttonColor='#9b59b6' title="Home" onPress={() => this.props.navigation.navigate('Home')}>
             <Icon name='home' style={styles.actionButtonIcon} />
           </ActionButton.Item>
