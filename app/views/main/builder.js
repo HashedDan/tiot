@@ -16,7 +16,8 @@ class Builder extends Component {
     for (var x = 1; x <= 30; ++x) {
       items.push({
         pickNumber: x,
-        key: x-1
+        key: x-1,
+        playerName: "Johnny Appleseed"
       })
     }
 
@@ -26,7 +27,6 @@ class Builder extends Component {
 
     this.state = {
       dataSource: items,
-      aVal: 'hey',
       items: items
     };
 
@@ -41,25 +41,23 @@ class Builder extends Component {
   }
 
   updateRow(val, up) {
-    console.log(val);
-    console.log(up);
-    // console.log(this.state.items[val]);
-    // console.log(val);
-    // var newItems = [];
-    // newItems = this.state.items.slice();
-    // if (up) {
-    //   newItems[val].pickNumber--;
-    // }
-    // else {
-    //   console.log(val)
-    //   console.log(newItems[val].key);
-    //   newItems[val].pickNumber++;
-    // }
+    var newItems = [];
+    newItems = this.state.items.slice();
+    if (up) {
+      console.log(val)
+      console.log(newItems[val].key);
+      newItems[val].pickNumber--;
+    }
+    else {
+      console.log(val)
+      console.log(newItems[val].key);
+      newItems[val].pickNumber++;
+    }
 
-    // this.setState({
-    //   dataSource: newItems,
-    //   items: newItems
-    // });
+    this.setState({
+      dataSource: newItems,
+      items: newItems
+    });
   }
 
   renderItem ({item}) {
@@ -67,7 +65,7 @@ class Builder extends Component {
       <ListItem
         roundAvatar
         key={item.key}
-        title={item.pickNumber}
+        title={item.pickNumber + ". " + item.playerName}
         subtitle={'Fill me!'}
         // avatar={{uri:item.picUrl}}
         // avatarContainerStyle={{paddingRight: 10}}
