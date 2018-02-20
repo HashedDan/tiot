@@ -42,24 +42,33 @@ class Builder extends Component {
     console.log("HERE");
   }
 
+  listenForItems(itemsRef) {
+    
+  }
+
   updateRow(val, up) {
     var newItems = [];
     newItems = this.state.items.slice();
+    var first = newItems[val];
+
     if (up && newItems[val].pickNumber != 1) {
-      console.log(val)
-      console.log(newItems[val].key);
-      newItems[val].pickNumber--;
+      var second = newItems[val-1];
+      first.key--;
+      first.pickNumber--;
+      second.key++;
+      second.pickNumber++;
+      newItems[val] = second;
+      newItems[val-1] = first;
     }
     else if (!up) {
-      console.log(val)
-      console.log(newItems[val].key);
-      newItems[val].pickNumber++;
-      newItems[val].key++;
-      newItems[val+1].key--;
+      var second = newItems[val+1];
+      first.key++;
+      first.pickNumber++;
+      second.key--;
+      second.pickNumber--;
+      newItems[val] = second;
+      newItems[val+1] = first;
     }
-
-    console.log(newItems[val].key);
-    console.log(newItems[val+1].key);
     this.setState({
       dataSource: newItems,
       items: newItems
@@ -81,7 +90,7 @@ class Builder extends Component {
         key={item.key}
         title={item.pickNumber + ". " + item.playerName}
         subtitle={'Fill me!'}
-        onPress={() => this.openModal()}
+        onPress={() => console.log(item.key)}
         // avatar={{uri:item.picUrl}}
         // avatarContainerStyle={{paddingRight: 10}}
         leftIcon={{name: 'chevron-up', type: 'entypo'}}
@@ -118,8 +127,13 @@ class Builder extends Component {
                 onPress={() => this.setState({aVal: 'yo'})}
                 title="Change Name"
               />
+        <Button
+          onPress={() => this.setState({aVal: 'yo'})}
+          title="Reset"
+        />
         <FlatList
           data={this.state.dataSource}
+          extraData={this.state}
           renderItem={this.renderItem}
         />
         <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{flex: 1, alignItems: 'center'}}>
