@@ -93,10 +93,10 @@ class Builder extends Component {
           data={this.state.dataSource}
           renderItem={this.renderItem}
         />
-        <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{flex: 1, alignItems: 'stretch'}}>
+        <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{flex: 1}}>
           <Image
                     style={{flex: 1}}
-                    source={{uri: 'https://wallpapershome.com/images/pages/pic_h/15707.jpg'}}
+                    source={require('../../assets/MenuBG.jpg')}
                   />
 
         </View>}>
