@@ -74,22 +74,29 @@ class Builder extends Component {
     var newItems = [];
     newItems = this.state.items.slice();
     var first = newItems[val];
+    var firstTeam = first.team;
 
     if (up && newItems[val].pickNumber != 1) {
       var second = newItems[val-1];
+      var secondTeam = second.team;
       first.key--;
       first.pickNumber--;
+      first.team = secondTeam;
       second.key++;
       second.pickNumber++;
+      second.team = firstTeam;
       newItems[val] = second;
       newItems[val-1] = first;
     }
     else if (!up) {
       var second = newItems[val+1];
+      var secondTeam = second.team;
       first.key++;
       first.pickNumber++;
+      first.team = secondTeam;
       second.key--;
       second.pickNumber--;
+      second.team = firstTeam;
       newItems[val] = second;
       newItems[val+1] = first;
     }
@@ -114,7 +121,7 @@ class Builder extends Component {
         key={item.key}
         title={item.pickNumber + ". " + item.playerName}
         subtitle={item.team}
-        onPress={() => console.log(item.key)}
+        onPress={() => this.openModal()}
         // avatar={{uri:item.picUrl}}
         // avatarContainerStyle={{paddingRight: 10}}
         leftIcon={{name: 'chevron-up', type: 'entypo'}}
@@ -137,7 +144,7 @@ class Builder extends Component {
         >
           <View style={styles.modalContainer}>
             <View style={styles.innerContainer}>
-              <Text>This is content inside of modal component</Text>
+              <Text>Search for a player to be selected!</Text>
               <Button
                   onPress={() => this.closeModal()}
                   title="Close modal"
@@ -162,8 +169,8 @@ class Builder extends Component {
         />
         <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{flex: 1, alignItems: 'center'}}>
           <Image
-                    style={{flex: 1}}
-                    source={require('../../assets/MenuBG2.jpg')}
+                    style={{flex: 1, alignSelf: 'stretch', width: undefined, height: undefined}}
+                    source={require('../../assets/MockMaven.png')}
                   />
 
         </View>}>
