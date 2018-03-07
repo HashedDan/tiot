@@ -17,7 +17,7 @@ class Home extends Component {
       dataSource: []
     };
 
-    this.itemsRef = firebase.database().ref('fullOrder/');
+    this.itemsRef = firebase.database().ref('players/');
   }
 
   componentDidMount() {

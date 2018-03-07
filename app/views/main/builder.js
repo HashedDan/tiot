@@ -13,14 +13,13 @@ class Builder extends Component {
     super(props);
 
     var items = [];
-    for (var x = 1; x <= 30; ++x) {
+    for (var x = 1; x <= 60; ++x) {
       items.push({
         pickNumber: x,
         key: x-1,
         playerName: x + "Some Guy",
       })
     }
-
     // var ds = new ListView.DataSource({
     //     rowHasChanged: (row1, row2) => row1.pickNumber !== row2.pickNumber,
     // });
@@ -32,19 +31,43 @@ class Builder extends Component {
       isVisible: false,
     };
 
-    this.itemsRef = firebase.database().ref('players/');
+    this.itemsRef = firebase.database().ref('fullOrder/');
 
     this.renderItem = this.renderItem.bind(this);
     this.updateRow = this.updateRow.bind(this);
+    this.listenForItems = this.listenForItems.bind(this);
   }
 
   componentDidMount() {
     console.log("HERE");
+    console.log(this.itemsRef);
+    this.listenForItems(this.itemsRef);
   }
 
   listenForItems(itemsRef) {
-    // TODO
-    
+    itemsRef.on('value', (snap) => {
+
+      // get children as an array
+      var items = [];
+      var i = 1;
+      snap.forEach((child) => {
+        // items.push({
+        //   name: child.val().name,
+        //   position: child.val().position,
+        //   team: child.val().team,
+        //   picUrl: child.val().picture,
+        //   key: child.key
+        // });
+        // console.log(this.items[0]);
+        console.log(child.val());
+        console.log(i);
+        i++;
+      });
+      // this.setState({
+      //   dataSource: items
+      // });
+
+    });
   }
 
   updateRow(val, up) {
