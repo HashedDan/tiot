@@ -18,6 +18,7 @@ class Builder extends Component {
         pickNumber: x,
         key: x-1,
         playerName: x + "Some Guy",
+        team: "xxx",
       })
     }
     // var ds = new ListView.DataSource({
@@ -51,21 +52,20 @@ class Builder extends Component {
       var items = [];
       var i = 1;
       snap.forEach((child) => {
-        // items.push({
-        //   name: child.val().name,
-        //   position: child.val().position,
-        //   team: child.val().team,
-        //   picUrl: child.val().picture,
-        //   key: child.key
-        // });
-        // console.log(this.items[0]);
+        items.push({
+          pickNumber: i,
+          key: i-1,
+          playerName: "Player" + i,
+          team: child.val()
+        });
         console.log(child.val());
         console.log(i);
         i++;
       });
-      // this.setState({
-      //   dataSource: items
-      // });
+      this.setState({
+        dataSource: items,
+        items: items
+      });
 
     });
   }
@@ -113,7 +113,7 @@ class Builder extends Component {
         roundAvatar
         key={item.key}
         title={item.pickNumber + ". " + item.playerName}
-        subtitle={'Fill me!'}
+        subtitle={item.team}
         onPress={() => console.log(item.key)}
         // avatar={{uri:item.picUrl}}
         // avatarContainerStyle={{paddingRight: 10}}
