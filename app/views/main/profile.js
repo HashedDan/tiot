@@ -25,9 +25,9 @@ class Profile extends Component {
                 />
         </View>
         <ActionButton buttonColor="rgba(0,0,0,1)" backdrop={<View style={{flex: 1, alignItems: 'center'}}>
-          <Image
-                    style={{flex: 1}}
-                    source={require('../../assets/MenuBG2.jpg')}
+        <Image
+                    style={{flex: 1, alignSelf: 'stretch', width: undefined, height: undefined}}
+                    source={require('../../assets/MockMaven.png')}
                   />
 
         </View>}>
